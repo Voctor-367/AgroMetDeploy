@@ -219,7 +219,7 @@ card_economia = Card(
                             ),
                         ),
                         Image(
-                            src=f"assets/icons/percentage.svg",
+                            src=f"/icons/percentage.svg",
                             width=20,
                             height=20,
                         ),
