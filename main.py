@@ -3,12 +3,10 @@ import pyrebase
 from datetime import date, datetime
 import locale
 from flet import *
-import plotly.express as px
-import pandas as pd
-import plotly.graph_objects as go
 import numpy as np
-from flet.plotly_chart import PlotlyChart
 from flet import UserControl
+
+
 
 #################### Assets
 BACKGROUND = "#E7E7ED"
@@ -406,8 +404,6 @@ dlg_estacao = DialogTemplateEstacao(
     )
 ).build()
 
-
-locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')    
 data_de_hoje = datetime.today()
 
 # Obtenha o dia da semana, o dia do mês e o mês em formato de string
@@ -494,7 +490,7 @@ class AppBarTemplate(AppBar):
             ),
             margin=margin.only(left=20, bottom=10),    
         ),
-        bgcolor="transparent",
+        bgcolor=BRANCO,
     ):
         """
         Construtor da classe AppBarTemplate. Define os atributos title, bgcolor e actions da AppBar.
@@ -1197,67 +1193,6 @@ dlg_cultura = DialogTemplateCultura(
 
 
 
-######################## Graficos
-class GraficoLinhas(UserControl):
-    def __init__(
-        self,
-        dicio = None,
-        title_graph = None,
-        titley = None,
-    ):
-        super().__init__()
-        self.dicio = dicio
-        self.title_graph = title_graph
-        self.titley = titley
-
-    def build(self):
-        green = [PRIMARY_GREEN,]*100
-        cinza_claro = [CINZA_AZULADO,]*100
-        
-        fig = go.Figure()
-
-        try:
-            dias = [v.key() for v in self.dicio.each() if type(v) != 'NoneType']
-        except:
-            dias = [i for i in range(10)]
-            
-        fig.add_trace(go.Scatter(x=dias, 
-            y=[v.val() for v in self.dicio.each()], 
-            line=dict(color='#00D154', 
-            width=6)))
-
-       
-        fig.update_layout(
-            title=self.title_graph,
-            titlefont_size=28,
-            yaxis=dict(
-                title=self.titley,
-                titlefont_size=22,
-                tickfont_size=14,
-            ),
-            xaxis=dict(
-                title='Dia',
-                titlefont_size=22,
-                tickfont_size=18,
-            ),
-            legend=dict(
-                x=1.0,
-                y=1.0,
-                bgcolor='rgba(255, 255, 255, 0)',
-                bordercolor='rgba(255, 255, 255, 0)'
-            ),
-            barmode='group',
-            bargap=0.1, # gap between bars of adjacent location coordinates.
-            bargroupgap=0.1 # gap between bars of the same location coordinate.
-        )
-        return PlotlyChart(fig, expand=True)
-
-grafico_temperatura = GraficoLinhas(dicio = dict_temp, title_graph = 'Temperatura', titley='Valor em °C')
-grafico_radiacao = GraficoLinhas(dicio = dict_rad, title_graph = 'Radiação solar', titley='Valor em W/m²')
-grafico_vento = GraficoLinhas(dicio = dict_vento, title_graph = 'Velocidade do vento', titley='Valor em m/s')
-grafico_umidade = GraficoLinhas(dicio = dict_umi, title_graph = 'Umidade', titley='Valor em %')
-
-
 
 
 ###########CArds
@@ -1756,11 +1691,6 @@ class HomePage:
                         Card(vento, elevation=8),
                         Card(pressao, elevation=8),
                         Card(radiacao, elevation=4),
-                        dashboard,
-                        grafico_temperatura,
-                        grafico_umidade,
-                        grafico_radiacao,
-                        grafico_vento,
                     ],
                     horizontal_alignment="center",
                 ),
@@ -1838,4 +1768,4 @@ def main(page: ft.Page):
     # firebase = config.firebase.FirebaseConfig(page)
 
 
-ft.app(main, assets_dir="assets")
+ft.app(main, view=ft.WEB_BROWSER)
