@@ -13,4 +13,4 @@ def main(page: ft.Page):
     # firebase = config.firebase.FirebaseConfig(page)
 
 
-ft.app(main, view=ft.AppView.WEB_BROWSER, assets_dir="assets")
+ft.app(main, view=ft.WEB_BROWSER, assets_dir="assets")
