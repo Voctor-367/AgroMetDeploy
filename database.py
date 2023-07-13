@@ -30,8 +30,6 @@ def calc_media(dicio, lista):
         soma = soma + valor
 
     media = soma/len(lista)
-
-    print(lista)
     return media
     
 
@@ -48,19 +46,18 @@ dict_umi = db.child('/Produtor/Cultura/Meteorologia/umidade/3').get()
 dict_vento = db.child('/Produtor/Cultura/Meteorologia/vento/5').get()
 dict_pressao = db.child('/Produtor/Cultura/Meteorologia/pressao_bmp/3').get()
 
-print(dict_temp)
 
 Etc = calc_media(valores_etc, values_etc) #Saldo de radiação em MJ/m2.dia
 
 
 Rn = calc_media(dict_rad, values_rad) #Saldo de radiação em MJ/m2.dia
-print(Rn)
+
 Temp = calc_media(dict_temp, values_temp) # Temperatura em graus Celsius
-print(Temp)
+
 ur = calc_media(dict_umi, values_umi)   # Umidade Relativa em porcentagem
-print(ur)
+
 vv = calc_media(dict_vento, values_vento)    # Velocidade do vento à 2m de altura em m/s
-print(vv)
+
 
 cultura = db.child('/Produtor/Cultura/cultura').get()
 cultura = cultura.val()
@@ -102,19 +99,13 @@ data_plantio = db.child('/Produtor/Cultura/data_plantio').get()
 data_plantio = data_plantio.val()
 
 
-#print(cultura)
-#print(Rn)
-#print(Temp)
-#print(ur)
-#print(vv)
-
 
 def get_value(dicio):
     dic = dicio.val()
     ultimo_valor = list(dic.values())[-1]
 
     return str(ultimo_valor)
-    print(ultimo_valor)
+ 
 
 
 def setIdade(value):
