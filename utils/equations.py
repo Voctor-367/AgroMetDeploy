@@ -41,7 +41,6 @@ Etc = float(Etc)
 ############################# Volume
 Cu = 0.85
 
-print(Etc)
 
 #Vt = volume total de água a ser aplicado por irrigação, m3;
 #Ai = 0.5
@@ -49,7 +48,6 @@ Vt = 1000*((float(Etc)*float(TR)*float(Ai))/(Cu))
 
 Vt = (int(Vt/100))
 
-print(Vt)
 
 esp_plantas = esp_plantas/100
 esp_linhas = esp_linhas/100
@@ -59,7 +57,6 @@ Ti = 6*((float(Vt)*float(esp_linhas)*float(esp_plantas))/(float(Ai)*float(vazao)
 
 Ti = round(Ti)
 
-print(Ti)
 
 #Tempo de funcionamento por posição(Setor) para Irrigação em faixa contínua
 
@@ -76,7 +73,6 @@ idade = data1 - data2
 idade = idade.days
 
 setIdade(idade)
-print(idade)
 
 
 #################### Economia
@@ -88,4 +84,3 @@ quant_gotej = ((Ai*10000)/((esp_linhas/100)*(esp_plantas/100)))
 litros_economizados = (quant_gotej*(tempo_ant/60)*vazao)-(Vt*1000)
 
 litros_economizados = round(litros_economizados)
-print(litros_economizados)
