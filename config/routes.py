@@ -1,5 +1,4 @@
 from pages.home import HomePage
-from pages.dashboard import DashBoardPage
 from flet import Page
 import flet as ft
 
@@ -12,7 +11,6 @@ class RouteConfig:
     def __init__(self, page: Page):
         self.page = page
         self.routes = {
-            "/dashboard": DashBoardPage.build(),
             "/": HomePage.build(),
         }
         """
